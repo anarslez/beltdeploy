@@ -1,0 +1,106 @@
+<head>
+        <style>
+            * {
+                margin: 10px;
+            }
+            h2{
+                display: inline-block;
+                width: 30%;
+            }
+            body {
+                border: solid gray;
+                min-height: 300px;
+                min-width: 600px;
+            }
+            form {
+                width: 10%;
+                display: inline-block;
+            }
+            th {
+                min-width: 10%;
+                border: gray solid;
+            }
+            .button {
+                display: inline-block;
+                width: 90px;
+                height: 40px;
+                background: lightpink;
+                padding: 5px;
+                text-align: center;
+                border-radius: 5px;
+                color: black;
+                font-weight: bold;
+                border: black solid;
+            }
+            .butto {
+                display: inline-block;
+                width: 90px;
+                height: 40px;
+                background: white;
+                border: black solid;
+                padding: 5px;
+                text-align: center;
+                border-radius: 5px;
+                color: black;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h2>Hello {{first_name}}</h2>
+        <a href="/logout">Logout</a>
+        <a class="button" href="/wishes/stats">VIEW STATS</a>
+        <a class="butto" href="/wishes/new">MAKE A WISH</a>
+        <h4>Your Wishlist:</h4>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        {% for i in wishes%}
+            <tr>
+            <th>{{i.name}}</th>
+            <th>{{i.created_at}}</th>
+            <th><a href="wishes/delete/{{i.id}}">Remove</a>|<a href="wishes/edit/{{i.id}}">Edit</a>|<a href="wishes/grant/{{i.id}}">Grant this Wish!!</a></th>
+            </tr>
+        {% endfor %}
+        </table>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <h4>Granted Wishes:</h4>
+        <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Wisher</th>
+                    <th>Date Added</th>
+                    <th>Date Granted</th>
+                    <th>Likes</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in grantedlike%}
+                <tr>
+                    <th>{{i.name}}</th>
+                    <th>{{i.wisher.first_name}}</th>
+                    <th>{{i.created_at}}</th>
+                    <th>{{i.updated_at}}</th>
+                    <th>{{i.likes.all|length}}</th>
+                    <th><a href="/wishes/like/{{i.id}}">Like</a></th>
+                </tr>
+                {% endfor %}
+                {% for i in grantednolike%}
+                <tr>
+                    <th>{{i.name}}</th>
+                    <th>{{i.wisher.first_name}}</th>
+                    <th>{{i.created_at}}</th>
+                    <th>{{i.updated_at}}</th>
+                    <th>{{i.likes.all|length}}</th>
+                    <th></th>
+                </tr>
+                {% endfor %}
+                </table>
+    </body>

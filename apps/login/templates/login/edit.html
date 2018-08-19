@@ -1,0 +1,40 @@
+<head>
+        <style>
+            input{
+                margin: 10px;
+            }
+            div{
+                width: 80%;
+                vertical-align: top;
+                border: solid gray;
+                max-height: 400px;
+                min-height: 200px;
+                padding: 10px;
+            }
+            input.but{
+                margin: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome {{first_name}}! Edit a wish</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        <div>
+            <form action="/wishes/update" method="POST">
+                {% csrf_token %}
+                I wish for:
+                <input type="text" name="name" value={{name}}>
+                <br> 
+                Description:
+                <input type="text" name="desc" value={{desc}}> 
+                <br>
+                <input class="but" type="submit" value="Edit a wish!">
+                <input type="hidden" name="wish_id" value={{wish_id}}>
+            </form>
+            <a href="/wishes">Cancel</a>
+        </div>
+</body>

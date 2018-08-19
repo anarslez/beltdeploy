@@ -1,0 +1,23 @@
+<head>
+        <style>
+            * {
+                margin: 20px;
+            }
+            body{
+                border: gray solid;
+            }
+            h2{
+                display: inline-block;
+                width: 50%;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h2>Hello {{first_name}}! These are your stats!</h2>
+        <a href="/logout">Logout</a>
+        <a href="/wishes">Dashboard</a>
+        <h3>Total wishes granted so far for all users: {{grantedwishes|length}}</h3>
+        <p>Your granted wishes: {{granteduserwishes|length}}</p>
+        <p>Your granted wishes: {{pendinguserwishes|length}}</p>
+    </body>
